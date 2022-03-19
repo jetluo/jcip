@@ -1,5 +1,6 @@
 package com.jetluo.jcip.chapter07;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,6 +37,19 @@ public class CheckForMail {
     }
 
     private boolean checkMail(String host) {
+        System.out.println("host:"+host+"时间：" + System.currentTimeMillis());
         return false;
+    }
+
+    public static void main(String[] args) {
+        CheckForMail checkForMail = new CheckForMail();
+        Set<String> hosts = new HashSet<>();
+        hosts.add("localhost");
+        hosts.add("127.0.0.1");
+        try {
+            checkForMail.checkMail(hosts,1,TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
