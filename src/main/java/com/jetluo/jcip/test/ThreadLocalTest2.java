@@ -1,5 +1,7 @@
 package com.jetluo.jcip.test;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @ClassName ThreadLocalTest2
  * @Description TODO
@@ -13,8 +15,19 @@ public class ThreadLocalTest2 {
     public static ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
     public static void main(String[] args) {
+        AtomicInteger atomicInteger= new AtomicInteger();
+
+        System.out.println("AtomicInteger:identityHashCode="+System.identityHashCode(atomicInteger));
+
+        System.out.println("AtomicInteger:incrementAndGet="+atomicInteger.incrementAndGet());
+
+        System.out.println("AtomicInteger:identityHashCode="+System.identityHashCode(atomicInteger));
+        AtomicInteger atomicInteger2= new AtomicInteger();
+        System.out.println("AtomicInteger2:identityHashCode="+System.identityHashCode(atomicInteger2));
         //在main线程中添加main线程的本地变量
         threadLocal.set("mainVal");
+
+
         //新创建一个子线程
         Thread thread = new Thread(new Runnable() {
             @Override
